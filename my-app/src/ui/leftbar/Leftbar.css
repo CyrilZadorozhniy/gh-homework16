@@ -1,0 +1,100 @@
+.leftbar {
+    background-color: #0e1a35;
+    width: 320px;
+    max-width: 320px;
+}
+.leftbar .wrap-logo {
+    max-width: 182px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    height: 85px;
+}
+.leftbar .wrap-logo img {
+    width: 100%;
+}
+.leftbar .wrap-logo h1 {
+    text-indent: -9999px;
+    position: absolute;
+}
+.nav-list {
+    display: flex;
+    flex-direction: column;
+}
+.nav-list li {
+    border-top: 2px solid #0d172e ;
+}.nav-list li:last-child {
+    border-bottom: 2px solid #0d172e ;
+}
+.nav-list li a {
+    transition: .2s;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size:21px;
+    color: #ffffff;
+    padding: 25px 30px;
+    border-left: 10px solid rgba(255, 255, 255, 0);
+}
+.nav-list li a:hover {
+    border-left: 10px solid #5584ff;
+    background-color: #122143;
+}
+.nav-list li .nav-active {
+    border-left: 10px solid #5584ff;
+    background-color: #122143;
+}
+.home-ico:before {
+    content: "";
+    background-image: url("../../assets/img/home-ico.png");
+    background-size: contain;
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+}
+.workflow-ico:before {
+    content: "";
+    background-image: url("../../assets/img/workflow-ico.png");
+    background-size: contain;
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+}
+.statistics-ico:before {
+    content: "";
+    background-image: url("../../assets/img/statistic-ico.png");
+    background-size: contain;
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+}
+.calendar-ico:before {
+    content: "";
+    background-image: url("../../assets/img/calendar-ico.png");
+    background-size: contain;
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+}
+.users-ico:before {
+    content: "";
+    background-image: url("../../assets/img/users-ico.png");
+    background-size: contain;
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+}
+.settings-ico:before {
+    content: "";
+    background-image: url("../../assets/img/settings-ico.png");
+    background-size: contain;
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+}
