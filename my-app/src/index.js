@@ -5,7 +5,6 @@ import App from './ui/App';
 import { BrowserRouter } from 'react-router-dom'
 import './ui/index.css';
 
-
 ReactDOM.render((
     <BrowserRouter>
         <MuiThemeProvider>

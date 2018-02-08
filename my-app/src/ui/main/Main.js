@@ -14,11 +14,11 @@ class Main extends React.Component {
         return (
             <div className={'main'}>
                 <Route exact path="/" component={Home} />
-                <Route exact path="/workflow" component={Workflow}/>
-                <Route exact path="/statistics" component={Statistics}/>
-                <Route exact path="/calendar" component={Calendar}/>
-                <Route exact path="/users" component={Users}/>
-                <Route exact path="/settings" component={Settings}/>
+                <Route path="/workflow" component={Workflow}/>
+                <Route path="/statistics" component={Statistics}/>
+                <Route path="/calendar" component={Calendar}/>
+                <Route path="/users" component={Users}/>
+                <Route path="/settings" component={Settings}/>
             </div>
         )
     }
