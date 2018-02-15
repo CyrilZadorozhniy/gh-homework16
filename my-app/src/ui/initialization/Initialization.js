@@ -9,6 +9,7 @@ const styles = {
 };
 
 class Initialization extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -31,37 +32,75 @@ class Initialization extends React.Component {
 
     handleSubmitRegister = (e) => {
         e.preventDefault();
-        console.log('username - ', this.state.username, 'pass - ', this.state.password);
-        localStorage.setItem("username", JSON.stringify(this.state.username));
-        localStorage.setItem("password", JSON.stringify(this.state.password));
-        this.setState ({
-            username: '',
-            password: '',
-            tabs: 'b',
-        });
+        const { history } = this.props;
+        let registerDate = {
+            username: this.state.username,
+            pass: this.state.password
+        };
+        fetch('/api/user/register', {
+            headers: {
+                'Content-type': 'application/json',
+            },
+            method: 'post',
+            body: JSON.stringify(registerDate)
+        })
+            .then(res => {
+                return res.json();
+            })
+            .then(res=> {
+                localStorage.setItem("token", JSON.stringify(res.token));
+                this.setState ({
+                    username: '',
+                    password: '',
+                    tabs: 'b',
+                });
+                history.push('/');
+            });
+
     };
     handleSubmitLogin = (e) => {
         e.preventDefault();
         const { history } = this.props;
-        let username = JSON.parse(localStorage.getItem("username")),
-            pass = JSON.parse(localStorage.getItem("password"));
-
-        if (username === this.state.username && pass === this.state.password) {
-            this.setState ({
-                username: '',
-                password: '',
+        let loginDate = {
+            username: this.state.username,
+            pass: this.state.password
+        };
+        fetch('api/user/login', {
+            headers: {
+                'Content-type': 'application/json',
+            },
+            method: 'post',
+            body: JSON.stringify(loginDate),
+        })
+            .then(res => {
+                return res.json();
+            })
+            .then (res => {
+                if (res.check) {
+                    this.setState ({
+                        username: '',
+                        password: '',
+                    });
+                    localStorage.setItem("token",JSON.stringify(res.token));
+                    history.push('/');
+                } else  {
+                    alert('username or password is not correct');
+                }
             });
-            history.push('/');
-        } else if (!(username === this.state.username)) {
-            alert('This user is not registered');
-        } else {
-            alert('username or password is not correct')
-        }
 
     };
+
+
     render() {
+        {
+            const { history } = this.props;
+            let tokenKey = JSON.parse(localStorage.getItem("token"));
+            if (!(tokenKey === null)) {
+               history.push('/');
+            }
+        }
         return (
-            <div className="initialization-site">
+            <div  className="initialization-site">
                 <div className="initialization-body">
                     <header className="initialization-header"> 
                         <div className="wrap-logo">

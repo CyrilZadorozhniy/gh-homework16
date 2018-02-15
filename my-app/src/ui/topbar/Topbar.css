@@ -2,9 +2,16 @@
     height: 86px;
     border-bottom: 1px solid #d4d9e3;
     display: flex;
-
+    justify-content: space-between;
     align-items: center;
 }
-.topbar-container {
+.left-container {
 
+}
+.right-container {
+    padding-right: 30px;
+}
+.avatar-button  {
+    display: flex;
+    align-items: center;
 }
