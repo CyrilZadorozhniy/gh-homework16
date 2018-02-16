@@ -1,5 +1,6 @@
 .topbar {
     height: 86px;
+    font-family: 'Roboto', sans-serif;
     border-bottom: 1px solid #d4d9e3;
     display: flex;
     justify-content: space-between;
@@ -10,8 +11,33 @@
 }
 .right-container {
     padding-right: 30px;
+    display: flex;
+    align-items: center;
 }
 .avatar-button  {
     display: flex;
     align-items: center;
+}
+.button-add {
+    font-family: 'Roboto', sans-serif;
+    border: none;
+    cursor: pointer;
+    background-color: #5584ff;
+    color: #ffffff;
+    transition: .2s;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: normal;
+    font-size: 15px;
+}
+.button-add:before {
+    content: "+";
+    margin-right: 10px;
+    font-weight: lighter;
+}
+.button-add:hover {
+    background-color: #4056ac;
+}
+.button-add:active {
+    transform: scale(0.95);
 }
