@@ -12,6 +12,8 @@ import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import Badge from 'material-ui/Badge';
 import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 
 const style = {
     iconButton: {
@@ -21,12 +23,13 @@ const style = {
     },
 };
 
-class Toptbar extends React.Component {
+class Topbar extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            open: false,
+            Popover: false,
+            signOutDialog: false
         };
     }
     handleClick = (event) => {
@@ -34,22 +37,46 @@ class Toptbar extends React.Component {
         event.preventDefault();
 
         this.setState({
-            open: true,
+            Popover: true,
             anchorEl: event.currentTarget,
         });
     };
 
     handleRequestClose = () => {
         this.setState({
-            open: false,
+            Popover: false,
         });
     };
     handleSignOut = () =>{
+        this.setState({signOutDialog: true, Popover: false});
+    };
+
+
+    handleClose = (e) => {
         const { history } = this.props;
-        localStorage.removeItem("token");
-        history.push('/initialization');
+        if (e === 'Submit') {
+            this.setState({signOutDialog: false});
+            localStorage.removeItem("token");
+            history.push('/initialization');
+        } else {
+            this.setState({signOutDialog: false});
+        }
+
     };
     render() {
+        const actions = [
+            <FlatButton
+                label="Cancel"
+                primary={true}
+                onClick={() => this.handleClose("Cancel")}
+            />,
+            <FlatButton
+                label="Submit"
+                primary={true}
+                keyboardFocused={true}
+                onClick={() =>this.handleClose("Submit")}
+            />,
+        ];
         return (
             <div className={'topbar'} >
                 <div className="left-container">
@@ -78,7 +105,7 @@ class Toptbar extends React.Component {
                             <i className="material-icons">arrow_drop_down</i>
                         </IconButton>
                         <Popover
-                            open={this.state.open}
+                            open={this.state.Popover}
                             anchorEl={this.state.anchorEl}
                             anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
                             targetOrigin={{horizontal: 'left', vertical: 'top'}}
@@ -93,9 +120,18 @@ class Toptbar extends React.Component {
                         </Popover>
                     </div>
                 </div>
+                <Dialog
+                    title="Sign out"
+                    actions={actions}
+                    modal={false}
+                    open={this.state.signOutDialog}
+                    onRequestClose={this.handleClose}
+                >
+                    Are you sure you want to sign out of your account?
+                </Dialog>
             </div>
         )
     }
 }
 
-export default withRouter(Toptbar)
+export default withRouter(Topbar)

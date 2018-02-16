@@ -12,6 +12,9 @@ class DefaultLayout extends React.Component{
         this.state = {
             loading: true,
         };
+
+    }
+    componentWillMount() {
         let data = {
             token: JSON.parse(localStorage.getItem("token"))
         };
