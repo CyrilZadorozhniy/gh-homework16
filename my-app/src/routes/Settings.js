@@ -3,7 +3,7 @@ import React from 'react';
 class Settings extends React.Component {
     render() {
         return(
-            <h1>6</h1>
+            <h2>6</h2>
         )
     }
 }

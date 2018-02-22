@@ -1,10 +1,19 @@
 import React from 'react';
-import Authorized from './authorized/Authorized';
 import { Switch, Route, Redirect} from 'react-router-dom';
 import Initialization from './initialization/Initialization';
 import CircularProgress from 'material-ui/CircularProgress';
 import './App.css';
 
+import Leftbar from './leftbar/Leftbar';
+import Topbar from './topbar/Topbar';
+
+//Routes
+import Home from '../routes/Home';
+import Workflow from '../routes/Workflow';
+import Statistics from '../routes/Statistics';
+import Calendar from '../routes/Calendar';
+import Users from '../routes/Users';
+import Settings from '../routes/Settings';
 
 class DefaultLayout extends React.Component{
     constructor(props) {
@@ -12,7 +21,7 @@ class DefaultLayout extends React.Component{
         this.state = {
             loading: true,
         };
-
+        document.getElementsByTagName('title')[0].text = 'React App';
     }
     componentWillMount() {
         let data = {
@@ -30,7 +39,7 @@ class DefaultLayout extends React.Component{
             })
 
             .then(res => {
-                setInterval(()=> {
+                setTimeout(()=> {
                     this.setState({
                         loading: false,
                         check: res.check
@@ -50,7 +59,17 @@ class DefaultLayout extends React.Component{
                            </div>
                 }
                 if (this.state.check){
-                    return <Component/>
+                    return (
+                        <div className={'site-body'}>
+                            <Leftbar/>
+                            <div className={'topbar-main-section'}>
+                                <Topbar/>
+                                <div className='main'>
+                                    <Component/>
+                                </div>
+                            </div>
+                        </div>
+                    )
                 } else {
                     localStorage.removeItem("token");
                     return   <Redirect to="/initialization" />
@@ -70,12 +89,12 @@ class App extends React.Component {
             <Route   path={'/initialization'} component={Initialization}  />
 
 
-            <DefaultLayout exact path="/" component={Authorized}/>
-            <DefaultLayout exact path="/workflow" component={Authorized}/>
-            <DefaultLayout exact path="/statistics" component={Authorized}/>
-            <DefaultLayout exact path="/calendar" component={Authorized}/>
-            <DefaultLayout exact path="/users" component={Authorized}/>
-            <DefaultLayout exact path="/settings" component={Authorized}/>
+            <DefaultLayout exact path="/" component={Home}/>
+            <DefaultLayout exact path="/workflow" component={Workflow}/>
+            <DefaultLayout exact path="/statistics" component={Statistics}/>
+            <DefaultLayout exact path="/calendar" component={Calendar}/>
+            <DefaultLayout exact path="/users" component={Users}/>
+            <DefaultLayout exact path="/settings" component={Settings}/>
         </Switch>
       </div>
     );

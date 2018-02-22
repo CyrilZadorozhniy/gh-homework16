@@ -1,0 +1,21 @@
+.section-home h2 {
+    margin-bottom: 20px;
+}
+.highcharts-credits {
+    display: none;
+}
+.highcharts-container .highcharts-root .highcharts-axis.highcharts-xaxis {
+    display: none ;
+}
+.highcharts-title  {
+    fill: #8492af !important;
+}
+.highcharts-title tspan {
+    font-family: 'Roboto', sans-serif;
+    font-size: 21px;
+    font-weight: 500;
+}
+text.highcharts-title:after {
+    content: 'Sales';
+    display: block;
+}

@@ -49,6 +49,7 @@ class Initialization extends React.Component {
             })
             .then(res=> {
                 localStorage.setItem("token", JSON.stringify(res.token));
+                localStorage.setItem("username",JSON.stringify(res.username));
                 this.setState ({
                     username: '',
                     password: '',
@@ -82,6 +83,7 @@ class Initialization extends React.Component {
                         password: '',
                     });
                     localStorage.setItem("token",JSON.stringify(res.token));
+                    localStorage.setItem("username",JSON.stringify(res.username));
                     history.push('/');
                 } else  {
                     alert('username or password is not correct');
@@ -92,13 +94,13 @@ class Initialization extends React.Component {
 
 
     render() {
-        {
-            const { history } = this.props;
-            let tokenKey = JSON.parse(localStorage.getItem("token"));
-            if (!(tokenKey === null)) {
-               history.push('/');
-            }
+        const { history } = this.props;
+        let tokenKey = JSON.parse(localStorage.getItem("token"));
+        if (tokenKey) {
+           history.push('/');
         }
+        document.getElementsByTagName('title')[0].text = 'Initialization';
+
         return (
             <div  className="initialization-site">
                 <div className="initialization-body">

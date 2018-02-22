@@ -1,0 +1,27 @@
+.section-statistics .Box-padding {
+    padding: 0;
+}
+.padding {
+    padding: 25px;
+}
+.sales-number {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px;
+}
+.sales-number p{
+    color: #8492af;
+    font-weight: 500;
+    font-size: 25px;
+    text-align: center;
+    margin: 40px;
+}
+.sales-number p span{
+    display: block;
+    font-size: 15px;
+    font-weight: normal;
+}
+.box-wrap {
+    display: flex;
+}

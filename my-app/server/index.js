@@ -6,6 +6,11 @@ App.use(bodyParser.json());
 let users = [{ user: 'qwe', pass: 'qwe',token:'Ebx8fOqIv8NPKfe6uDL4' },];
 
 App.post('/api/user/register', (req,res) => {
+    function randomValue(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
     function makeToken() {
         let text = "";
         let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -16,12 +21,29 @@ App.post('/api/user/register', (req,res) => {
         return text;
     }
     let tokenKey = makeToken();
-    users.push({user: req.body.username, pass: req.body.pass, token: tokenKey});
+    users.push({
+        user: req.body.username,
+        pass: req.body.pass,
+        token: tokenKey,
+        charts: {
+            salesChart:{
+                lastYear:[ ["Websites",randomValue(800,1000)],["Logo", randomValue(250,1000)],["Social Media",randomValue(800,1000)],["Adwords", randomValue(800,1000)], ["E-Commerce", randomValue(800,1000)]],
+                lastMonth:[ ["Websites",randomValue(300,800)],["Logo", randomValue(50,250)],["Social Media",randomValue(300,800)],["Adwords", randomValue(300,800)], ["E-Commerce", randomValue(300,800)]],
+                lastWeek:[ ["Websites",randomValue(1,300)],["Logo", randomValue(1,50)],["Social Media",randomValue(1,300)],["Adwords", randomValue(1,300)], ["E-Commerce", randomValue(1,300)]]
+            },
+            reportsChart:{
+                lastYear:[randomValue(700,1000),randomValue(700,1000),randomValue(700,1000),randomValue(700,1000),randomValue(700,1000),randomValue(700,1000),randomValue(700,1000),randomValue(700,1000),randomValue(700,1000),randomValue(700,1000),randomValue(700,1000),randomValue(700,1000)],
+                lastMonth:[randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250)],
+                lastWeek:[randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250),randomValue(1,250)]
+            }
+        }
+    });
     console.log('registed');
     console.log('user - ',req.body.username);
     console.log('token - ',tokenKey);
     return res.json({
         token: tokenKey,
+        username: req.body.username
     });
 });
 
@@ -31,12 +53,11 @@ App.post('/api/user/login', (req,res) => {
         return (item.user === req.body.username && item.pass === req.body.pass)
     });
 
-   if (user[0] !== undefined) {
+   if (user[0]) {
        console.log('true');
        return res.json({
            check: true,
            username: user[0].user,
-           password: user[0].pass,
            token: user[0].token
        })
    } else {
@@ -47,11 +68,11 @@ App.post('/api/user/login', (req,res) => {
    }
 });
 App.post('/api/user/check',(req,res) => {
-    let tokenKey = users.filter((item)=> {
+    let validUser = users.filter((item)=> {
         return (item.token === req.body.token)
     });
 
-    if (tokenKey[0] !== undefined) {
+    if (validUser[0]) {
         console.log('Token found');
         return res.json({
             check: true
@@ -62,6 +83,15 @@ App.post('/api/user/check',(req,res) => {
             check: false
         })
     }
+});
+App.post('/api/user/charts',(req,res) => {
+    let validUser = users.filter((item)=> {
+        return (item.token === req.body.token)
+    });
+        console.log('Charts sent');
+    return res.json({
+        charts: validUser[0].charts
+    })
 });
 
 App.listen(4000, () => {

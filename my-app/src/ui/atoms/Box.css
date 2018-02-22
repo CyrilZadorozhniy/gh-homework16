@@ -1,0 +1,14 @@
+.Box {
+    background-color: #ffffff;
+    border: 1px solid #d4d9e3;
+    display: inline-block;
+    margin: 15px;
+}
+.Box h3{
+    color: #8492af;
+    font-size: 24px;
+    font-weight: 500;
+}
+.Box-padding {
+    padding: 25px;
+}
