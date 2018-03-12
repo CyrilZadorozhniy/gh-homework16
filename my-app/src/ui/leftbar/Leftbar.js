@@ -4,6 +4,15 @@ import './Leftbar.css';
 
 import Logo from '../../assets/img/logo.png'
 
+const styles = {
+    openLeftBar: {
+        width: 270
+    },
+    closeLeftBar: {
+        width: 0,
+    }
+};
+
 class NavigationList extends React.Component {
     titleSet = (e) => {
         document.getElementsByTagName('title')[0].text = e.target.text;
@@ -39,8 +48,9 @@ class NavigationList extends React.Component {
 
 class Leftbar extends React.Component {
     render() {
+        console.log(this.props.leftBarToggle);
         return (
-            <div className="leftbar">
+            <div className="leftbar" style={this.props.leftBarToggle? styles.openLeftBar: styles.closeLeftBar}>
                 <div className="wrap-logo">
                     <img src={Logo} alt="Merkury"/>
                     <h1>Merkury</h1>

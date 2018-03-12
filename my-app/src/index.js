@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import App from './ui/App';
 import { BrowserRouter } from 'react-router-dom'
 import './ui/index.css';
+import "bootstrap/dist/css/bootstrap.min.css"
 
 ReactDOM.render((
     <BrowserRouter>

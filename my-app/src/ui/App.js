@@ -6,7 +6,7 @@ import './App.css';
 
 import Leftbar from './leftbar/Leftbar';
 import Topbar from './topbar/Topbar';
-
+import 'react-bootstrap/'
 //Routes
 import Home from '../routes/Home';
 import Workflow from '../routes/Workflow';
@@ -14,12 +14,19 @@ import Statistics from '../routes/Statistics';
 import Calendar from '../routes/Calendar';
 import Users from '../routes/Users';
 import Settings from '../routes/Settings';
+//calendar
+import localizer from 'react-big-calendar/lib/localizers/globalize';
+import globalize from 'globalize';
+localizer(globalize);
+
+
 
 class DefaultLayout extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
             loading: true,
+            leftBarToggle: false
         };
         document.getElementsByTagName('title')[0].text = 'React App';
     }
@@ -48,7 +55,11 @@ class DefaultLayout extends React.Component{
 
             });
     }
-
+    onClickLeftBar = (e) => {
+        this.setState({
+            leftBarToggle: e
+        })
+    };
     render() {
         const  {component: Component, ...rest } = this.props;
         return (
@@ -61,11 +72,11 @@ class DefaultLayout extends React.Component{
                 if (this.state.check){
                     return (
                         <div className={'site-body'}>
-                            <Leftbar/>
+                            <Leftbar  leftBarToggle={this.state.leftBarToggle}/>
                             <div className={'topbar-main-section'}>
-                                <Topbar/>
+                                <Topbar onClickLeftBar={this.onClickLeftBar}/>
                                 <div className='main'>
-                                    <Component/>
+                                    <Component leftBarToggle={this.state.leftBarToggle}/>
                                 </div>
                             </div>
                         </div>

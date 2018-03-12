@@ -1,7 +1,8 @@
 .leftbar {
     background-color: #0e1a35;
-    width: 320px;
-    max-width: 320px;
+    width: 270px;
+    max-width: 270px;
+    transition: .2s;
 }
 .leftbar .wrap-logo {
     max-width: 182px;

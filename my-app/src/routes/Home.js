@@ -14,16 +14,16 @@ const styles = {
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginBottom: 20
+      marginBottom: 20,
   }
 };
 
 class Home extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            loading: true
-        }
+            loading: true,
+        };
     }
     componentWillMount() {
         let data = {
@@ -42,7 +42,7 @@ class Home extends React.Component {
             .then(res => {
                 this.setState({
                     charts: res.charts,
-                    loading: false
+                    loading: false,
                 });
                 let salesChart = this.refs.salesChart.getChart(),
                     reportsChart = this.refs.reportsChart.getChart();
@@ -52,6 +52,9 @@ class Home extends React.Component {
                 reportsChart.series[0].setData(this.state.charts.reportsChart.lastYear,true);
             });
     }
+    chartWidth = () => {
+
+    } ;
     chartTitleCount = (e) => {
         let a = 0;
         for (let i = 0; i < this.state.charts.salesChart[e].length; i++) {
@@ -61,6 +64,7 @@ class Home extends React.Component {
     };
     filterSalesChart = (e) => {
         let chart = this.refs.salesChart.getChart();
+        // console.log(e);
         // console.log('start');
         // console.log(chart.series[0].data);
         switch(e) {
@@ -103,7 +107,26 @@ class Home extends React.Component {
                 break;
         }
     };
+    componentDidUpdate() {
+        const mainWidth = document.getElementsByClassName("main")[0].clientWidth ,
+              leftbarWidth = document.getElementsByClassName('leftbar')[0].clientWidth;
+
+
+            let salesChart = this.refs.salesChart.getChart(),
+                reportsChart = this.refs.reportsChart.getChart();
+            if (this.props.leftBarToggle) {
+                salesChart.setSize((mainWidth /3) - leftbarWidth / 5 ,null);
+                reportsChart.setSize((mainWidth /1.97) - leftbarWidth / 4,null);
+                console.log('open')
+            } else {
+                salesChart.setSize((mainWidth /3) + leftbarWidth / 3,null);
+                reportsChart.setSize((mainWidth /1.97 ) + leftbarWidth / 1.97,null);
+                console.log('close')
+
+                    };
+    }
     render() {
+
         const userName = JSON.parse(localStorage.getItem("username"));
         const selects = ["Last Year", "Last Month", "Last Week"];
             if (this.state.loading) {
@@ -113,7 +136,6 @@ class Home extends React.Component {
                     </div>
                 )
             } else {
-
                 return (
                     <div className="section-home">
                         <h2>Hello {userName}!</h2>

@@ -1,0 +1,12 @@
+.workflow-list {
+    display: flex;
+    justify-content: space-between;
+}
+.workflow-list .workflow-list-item {
+   width: 32%;
+}
+
+.section-workflow .Box-padding {
+    padding: 15px !important;
+    width: 100% !important;
+}

@@ -29,7 +29,8 @@ class Topbar extends React.Component {
 
         this.state = {
             Popover: false,
-            signOutDialog: false
+            signOutDialog: false,
+            leftBarToggle: true
         };
     }
     handleClick = (event) => {
@@ -54,7 +55,7 @@ class Topbar extends React.Component {
 
     handleClose = (e) => {
         const { history } = this.props;
-        if (e === 'Submit') {
+        if (e) {
             this.setState({signOutDialog: false});
             localStorage.removeItem("token");
             history.push('/initialization');
@@ -63,24 +64,31 @@ class Topbar extends React.Component {
         }
 
     };
+    leftBarToggle = () => {
+      this.setState({
+          leftBarToggle: !this.state.leftBarToggle
+      })  ;
+        this.props.onClickLeftBar(this.state.leftBarToggle)
+    };
     render() {
         const actions = [
             <FlatButton
                 label="Cancel"
                 primary={true}
-                onClick={() => this.handleClose("Cancel")}
+                onClick={() => this.handleClose(false)}
             />,
             <FlatButton
-                label="Submit"
+                label="Sign out"
                 primary={true}
-                keyboardFocused={true}
-                onClick={() =>this.handleClose("Submit")}
+                onClick={() =>this.handleClose(true)}
             />,
         ];
         return (
             <div className={'topbar'} >
                 <div className="left-container">
-
+                    <IconButton style={{marginLeft: 15}} onClick={this.leftBarToggle}>
+                        <i className="material-icons">menu</i>
+                    </IconButton>
                 </div>
                 <div className="right-container">
                     <button className="button-add">Add project</button>

@@ -2,7 +2,6 @@ const gradientSplineChart = {
     chart: {
         type: 'spline',
         height: '291',
-        width: 500
     },
     title: {
         text: ''

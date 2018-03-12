@@ -5,6 +5,7 @@ export default class Select extends React.Component {
     handleChange = (e) => {
         this.props.onChangeSelect(e.target.value)
     };
+
     render() {
         return (
             <label className="label">

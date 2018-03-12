@@ -1,0 +1,20 @@
+.online:before {
+    content:"";
+    display: block;
+    width: 3px;
+    height: 3px;
+    background-color: #00bf1b;
+}
+.react-bs-table-pagination .row {
+    display: flex;
+    flex-direction: column;
+}
+.react-bs-table-pagination .row .col-md-6:first-child {
+    display: none;
+}
+.react-bs-table-pagination .row .col-md-6 {
+    display: flex !important;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+}

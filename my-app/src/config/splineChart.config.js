@@ -2,7 +2,7 @@ const splineChart = {
     chart: {
         type: 'spline',
         height: '300',
-        width: 500
+
     },
     title: {
         text: ''

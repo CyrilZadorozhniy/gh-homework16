@@ -3,8 +3,8 @@
     min-height: 100vh;
 }
 .topbar-main-section {
-    width: 100%;
     display: flex;
+    flex: 1;
     flex-direction: column;
 }
 .main {

@@ -11,12 +11,13 @@ import CircularProgress from 'material-ui/CircularProgress';
 import ReactHighcharts from 'react-highcharts';
 import GradientSplineChart from "../config/gradientSplineChart.config";
 
-class Statistics extends React.Component {
+let chart = true ;
 
+class Statistics extends React.Component {
     constructor() {
         super();
         this.state = {
-            loading: true
+            loading: true,
         }
     }
     componentWillMount() {
@@ -40,9 +41,27 @@ class Statistics extends React.Component {
                 });
                 let reportsChart = this.refs.reportsChart.getChart();
                 reportsChart.series[0].setData(this.state.charts.reportsChart.lastYear,true);
+                reportsChart.setSize((document.getElementsByClassName("main")[0].clientWidth / 2),null);
                 console.log(this.state.charts.salesChart)
             });
     }
+    componentDidUpdate() {
+        let setWidthChart = (a , call) => {
+            let reportsChart = this.refs.reportsChart.getChart();
+            chart = false;
+            reportsChart.setSize((document.getElementsByClassName(a)[0].clientWidth / 2) - 30,null);
+            call()
+        };
+        if (chart) {
+            setTimeout(()=>{
+                setWidthChart("main",()=> {
+                    chart = true
+                })
+            },200);
+        }
+
+    }
+
     filterReportsChart = (e) => {
         let chart = this.refs.reportsChart.getChart();
         switch(e) {

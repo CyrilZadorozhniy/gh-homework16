@@ -3,7 +3,6 @@ const SalesChart = {
     chart: {
         type: 'pie',
         height: '300',
-        width: 370
     },
     plotOptions: {
         pie: {
