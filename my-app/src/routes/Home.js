@@ -52,9 +52,7 @@ class Home extends React.Component {
                 reportsChart.series[0].setData(this.state.charts.reportsChart.lastYear,true);
             });
     }
-    chartWidth = () => {
 
-    } ;
     chartTitleCount = (e) => {
         let a = 0;
         for (let i = 0; i < this.state.charts.salesChart[e].length; i++) {

@@ -2,10 +2,26 @@
     display: flex;
     justify-content: space-between;
 }
+.workflow-board .Box-padding {
+    margin: 15px 0 !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.workflow-board .Box-padding .content-wrap {
+   flex: 1;
+    padding-left: 15px;
+}
+.workflow-board .Box-padding .content-wrap p {
+   flex: 1;
+}
+.workflow-board .Box-padding .content-wrap h4 {
+   flex: 1;
+}
 .workflow-list .workflow-list-item {
    width: 32%;
+    height: calc(100vh - 86px);
 }
-
 .section-workflow .Box-padding {
     padding: 15px !important;
     width: 100% !important;

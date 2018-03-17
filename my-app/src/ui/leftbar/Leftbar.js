@@ -48,7 +48,6 @@ class NavigationList extends React.Component {
 
 class Leftbar extends React.Component {
     render() {
-        console.log(this.props.leftBarToggle);
         return (
             <div className="leftbar" style={this.props.leftBarToggle? styles.openLeftBar: styles.closeLeftBar}>
                 <div className="wrap-logo">

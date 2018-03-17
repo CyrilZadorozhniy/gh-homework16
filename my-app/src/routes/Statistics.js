@@ -46,19 +46,17 @@ class Statistics extends React.Component {
             });
     }
     componentDidUpdate() {
-        let setWidthChart = (a , call) => {
-            let reportsChart = this.refs.reportsChart.getChart();
-            chart = false;
-            reportsChart.setSize((document.getElementsByClassName(a)[0].clientWidth / 2) - 30,null);
-            call()
+        const mainWidth = document.getElementsByClassName("main")[0].clientWidth ,
+            leftbarWidth = document.getElementsByClassName('leftbar')[0].clientWidth;
+        let reportsChart = this.refs.reportsChart.getChart();
+        if (this.props.leftBarToggle) {
+            reportsChart.setSize((mainWidth /1.97) - leftbarWidth / 4,null);
+            console.log('open')
+        } else {
+            reportsChart.setSize((mainWidth /1.97 ) + leftbarWidth / 1.97,null);
+            console.log('close')
+
         };
-        if (chart) {
-            setTimeout(()=>{
-                setWidthChart("main",()=> {
-                    chart = true
-                })
-            },200);
-        }
 
     }
 

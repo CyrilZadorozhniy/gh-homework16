@@ -1,6 +1,7 @@
 import React from 'react';
 import './Topbar.css'
 import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
 
 // img
 import  User from '../../assets/img/user.jpg'
@@ -107,7 +108,9 @@ class Topbar extends React.Component {
                     </Badge>
                     <div className="avatar-button">
                         <IconButton style={style.iconButton}  onClick={this.handleClick}>
-                            <Avatar src={User} size={50}  />
+                            {
+                                (this.props.statusProps === 'Hide Avatar')? null:<Avatar src={User} size={50}/>
+                            }
                         </IconButton>
                         <IconButton style={style.iconButton}  onClick={this.handleClick}>
                             <i className="material-icons">arrow_drop_down</i>
@@ -142,4 +145,9 @@ class Topbar extends React.Component {
     }
 }
 
-export default withRouter(Topbar)
+const  mapState = (state, props) => {
+    return {
+        statusProps: state.status
+    }
+};
+export default connect(mapState)(withRouter(Topbar));
