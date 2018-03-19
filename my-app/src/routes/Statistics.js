@@ -41,7 +41,7 @@ class Statistics extends React.Component {
                 });
                 let reportsChart = this.refs.reportsChart.getChart();
                 reportsChart.series[0].setData(this.state.charts.reportsChart.lastYear,true);
-                reportsChart.setSize((document.getElementsByClassName("main")[0].clientWidth / 2),null);
+                reportsChart.setSize((document.getElementsByClassName("main")[0].clientWidth / 2.2),null);
                 console.log(this.state.charts.salesChart)
             });
     }
