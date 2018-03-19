@@ -23,6 +23,7 @@ class Home extends React.Component {
         super(props);
         this.state = {
             loading: true,
+            leftBarToggle: this.props.leftBarToggle
         };
     }
     componentWillMount() {
@@ -106,22 +107,24 @@ class Home extends React.Component {
         }
     };
     componentDidUpdate() {
-        const mainWidth = document.getElementsByClassName("main")[0].clientWidth ,
-              leftbarWidth = document.getElementsByClassName('leftbar')[0].clientWidth;
+        if (!this.state.loading) {
+            let salesChart = this.refs.salesChart.getChart();
+            salesChart.setTitle({text: this.chartTitleCount("lastYear")});
+            const mainWidth = document.getElementsByClassName("main")[0].clientWidth ,
+                leftbarWidth = document.getElementsByClassName('leftbar')[0].clientWidth;
 
 
-            let salesChart = this.refs.salesChart.getChart(),
-                reportsChart = this.refs.reportsChart.getChart();
+            let reportsChart = this.refs.reportsChart.getChart();
             if (this.props.leftBarToggle) {
-                salesChart.setSize((mainWidth /3) - leftbarWidth / 5 ,null);
+                salesChart.setSize((mainWidth /3),null);
                 reportsChart.setSize((mainWidth /1.97) - leftbarWidth / 4,null);
-                console.log('open')
+                console.log('open 1')
             } else {
-                salesChart.setSize((mainWidth /3) + leftbarWidth / 3,null);
-                reportsChart.setSize((mainWidth /1.97 ) + leftbarWidth / 1.97,null);
-                console.log('close')
-
-                    };
+                salesChart.setSize((mainWidth /3),null);
+                reportsChart.setSize((mainWidth /1.97 ),null);
+                console.log('close 1')
+            };
+        }
     }
     render() {
 
